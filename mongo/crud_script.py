@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 import pymongo
+import json
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client.mydb
@@ -92,3 +93,12 @@ collection = db.mycollection
 
 # for result in results:
 #     print(result)
+
+
+
+
+# with open("accounts.json", "r") as file:
+#     data = json.load(file)
+#     result = collection.insert_many(data)
+
+# print("Inserted data with the following IDs:", result.inserted_ids)
