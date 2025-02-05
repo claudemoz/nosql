@@ -1,0 +1,16 @@
+version: "3"
+services:
+  logstash:
+    image: logstash:7.6.2
+    container_name: logstash
+    hostname: logstash
+    ports:
+      - "9600:9600"
+      - "8089:8089"
+    restart: always
+    networks:
+      - dockerelk
+
+networks:
+  dockerelk:
+    driver: bridge

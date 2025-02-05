@@ -1,30 +1,19 @@
-version: '3.8'
+version: "3"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+    image: elasticsearch:7.6.2
     container_name: elasticsearch
+    hostname: elasticsearch
+    restart: always
     environment:
-      - node.name=elasticsearch
-      - cluster.name=elasticsearch-single-node
-      - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "xpack.security.enabled=false"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
+      - "discovery.type=single-node"
     ports:
       - 9200:9200
+      - 9300:9300
     networks:
-      - elastic
-
-volumes:
-  elasticsearch-data:
-    driver: local
-
+      - dockerelk
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 networks:
-  elastic:
+  dockerelk:
     driver: bridge
